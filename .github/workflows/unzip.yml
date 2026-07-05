@@ -1,0 +1,67 @@
+name: Automated Unzipping
+
+on:
+  push:
+    paths:
+      - '**.zip'
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find and unzip new ZIP files
+        run: |
+          BEFORE="${{ github.event.before }}"
+          SHA="${{ github.sha }}"
+
+          # On first push to a branch, 'before' is all zeros — list all ZIP files instead
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "First push to branch — scanning all ZIP files in the repository."
+            CHANGED_ZIPS=$(find . -name '*.zip' -not -path './.git/*' || true)
+          else
+            CHANGED_ZIPS=$(git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" | grep '\.zip$' || true)
+          fi
+
+          if [ -z "$CHANGED_ZIPS" ]; then
+            echo "No ZIP files changed in this push."
+            exit 0
+          fi
+
+          echo "ZIP files to unzip:"
+          echo "$CHANGED_ZIPS"
+
+          while IFS= read -r ZIP_FILE; do
+            # Strip leading ./ if present
+            ZIP_FILE="${ZIP_FILE#./}"
+            if [ -f "$ZIP_FILE" ]; then
+              ZIP_DIR=$(dirname "$ZIP_FILE")
+              ZIP_NAME=$(basename "$ZIP_FILE" .zip)
+              DEST_DIR="$ZIP_DIR/$ZIP_NAME"
+              echo "Unzipping '$ZIP_FILE' into '$DEST_DIR'..."
+              mkdir -p "$DEST_DIR"
+              unzip -o "$ZIP_FILE" -d "$DEST_DIR"
+            else
+              echo "Warning: '$ZIP_FILE' not found, skipping."
+            fi
+          done <<< "$CHANGED_ZIPS"
+
+      - name: Commit and push unzipped files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: unzip files added in ${{ github.sha }}"
+            git push
+          fi
