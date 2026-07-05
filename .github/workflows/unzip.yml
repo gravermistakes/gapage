@@ -7,6 +7,8 @@ on:
 
 jobs:
   unzip:
+    # Skip commits created by this workflow to prevent infinite loops
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,10 +24,10 @@ jobs:
           BEFORE="${{ github.event.before }}"
           SHA="${{ github.sha }}"
 
-          # On first push to a branch, 'before' is all zeros — list all ZIP files instead
+          # On first push to a branch, 'before' is all zeros — list all tracked ZIP files instead
           if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            echo "First push to branch — scanning all ZIP files in the repository."
-            CHANGED_ZIPS=$(find . -name '*.zip' -not -path './.git/*' || true)
+            echo "First push to branch — scanning all tracked ZIP files."
+            CHANGED_ZIPS=$(git ls-files '*.zip' || true)
           else
             CHANGED_ZIPS=$(git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" | grep '\.zip$' || true)
           fi
@@ -38,30 +40,58 @@ jobs:
           echo "ZIP files to unzip:"
           echo "$CHANGED_ZIPS"
 
+          STAGED_DIRS=""
+
           while IFS= read -r ZIP_FILE; do
             # Strip leading ./ if present
             ZIP_FILE="${ZIP_FILE#./}"
-            if [ -f "$ZIP_FILE" ]; then
-              ZIP_DIR=$(dirname "$ZIP_FILE")
-              ZIP_NAME=$(basename "$ZIP_FILE" .zip)
-              DEST_DIR="$ZIP_DIR/$ZIP_NAME"
-              echo "Unzipping '$ZIP_FILE' into '$DEST_DIR'..."
-              mkdir -p "$DEST_DIR"
-              unzip -o "$ZIP_FILE" -d "$DEST_DIR"
-            else
+            if [ ! -f "$ZIP_FILE" ]; then
               echo "Warning: '$ZIP_FILE' not found, skipping."
+              continue
             fi
+
+            ZIP_DIR=$(dirname "$ZIP_FILE")
+            ZIP_NAME=$(basename "$ZIP_FILE" .zip)
+            DEST_DIR="$ZIP_DIR/$ZIP_NAME"
+
+            echo "Unzipping '$ZIP_FILE' into '$DEST_DIR'..."
+            mkdir -p "$DEST_DIR"
+            unzip -o "$ZIP_FILE" -d "$DEST_DIR"
+
+            # Validate that no extracted path escapes the destination directory
+            while IFS= read -r EXTRACTED; do
+              REAL_DEST=$(realpath "$DEST_DIR")
+              REAL_EXTRACTED=$(realpath "$EXTRACTED" 2>/dev/null || echo "")
+              if [ -n "$REAL_EXTRACTED" ] && [[ "$REAL_EXTRACTED" != "$REAL_DEST"* ]]; then
+                echo "Error: Extracted path '$EXTRACTED' escapes destination '$DEST_DIR'. Aborting."
+                exit 1
+              fi
+            done < <(find "$DEST_DIR" -mindepth 1)
+
+            STAGED_DIRS="$STAGED_DIRS $DEST_DIR"
           done <<< "$CHANGED_ZIPS"
+
+          # Export staged dirs for use in the next step
+          echo "STAGED_DIRS=$STAGED_DIRS" >> "$GITHUB_ENV"
 
       - name: Commit and push unzipped files
         run: |
+          if [ -z "$STAGED_DIRS" ]; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add .
+          # Stage only the directories produced by unzipping
+          for DIR in $STAGED_DIRS; do
+            git add "$DIR"
+          done
+
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: unzip files added in ${{ github.sha }}"
+            git commit -m "chore: unzip archives from ${GITHUB_SHA:0:7} [skip ci]"
             git push
           fi
