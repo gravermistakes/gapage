@@ -1,0 +1,31 @@
+# cta-v1 :: templates/constraint-set.yaml
+# Example constraint sets for homeostasis.sh. Pass each as a --constraint arg.
+# License: ESL-ANCSA-MRA-IndiModSHA v1.0
+
+# Three sample sets you can pass directly. Run:
+#   ./homeostasis.sh --state "0.3,0.5,0.2" \
+#       $(yq '.probability_simplex.constraints[] | "--constraint " + .' \
+#         templates/constraint-set.yaml)
+# or just copy the constraint strings by hand.
+
+probability_simplex:
+  description: "non-negative reals summing to 1.0"
+  state_example: "0.3,0.5,0.2"
+  constraints:
+    - sum:1.0
+    - range:0:1
+
+decay_schedule:
+  description: "monotonically decreasing learning rate"
+  state_example: "0.1,0.08,0.05,0.03,0.01"
+  constraints:
+    - monotonic:desc
+    - range:0:1
+
+pinned_origin_3d:
+  description: "first dim fixed at 0, others free in [-1,1]"
+  state_example: "0.0,0.4,-0.3"
+  constraints:
+    - dim_equal:0:0.0
+    - dim_in:1:-1:1
+    - dim_in:2:-1:1

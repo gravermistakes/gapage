@@ -1,0 +1,78 @@
+# cta-v1 :: config/cta-config.yaml
+#
+# Default parameters for the CTA framework. Read by phase scripts via
+# cta_config_get from lib/common.sh. CLI flags always override these.
+#
+# License: ESL-ANCSA-MRA-IndiModSHA v1.0
+
+# ---------- Phase 1: trialectic ----------
+# Component weights by inference domain. Sums must equal 1.0.
+domain_weights:
+  formal:    { L: 0.40, S: 0.10, P: 0.10, St: 0.30, F: 0.05, C: 0.05 }
+  natural:   { L: 0.10, S: 0.30, P: 0.20, St: 0.10, F: 0.15, C: 0.15 }
+  empirical: { L: 0.15, S: 0.15, P: 0.35, St: 0.15, F: 0.10, C: 0.10 }
+  pragmatic: { L: 0.05, S: 0.15, P: 0.15, St: 0.10, F: 0.40, C: 0.15 }
+  default:   { L: 0.15, S: 0.15, P: 0.25, St: 0.15, F: 0.15, C: 0.15 }
+
+# Synthesis classifier thresholds (operate on the six component scores)
+synthesis_thresholds:
+  rejection_logical_max:   0.30   # L below this -> rejection
+  rejection_lowcount_min:  3      # >= N components below 0.30 -> rejection
+  integration_min:         0.80   # composite congruence minimum
+  context_partition_min_C: 0.65
+  context_partition_max_S: 0.60
+  hierarchy_min_St:        0.65
+  hierarchy_max_F:         0.55
+  complement_max_S:        0.45
+  complement_min_L:        0.65
+  tradeoff_max_F:          0.50
+  tradeoff_min_LSt_mean:   0.60
+  paradox_min_variance:    0.03
+  paradox_max_dominance:   0.80
+
+# ---------- Phase 2: invariant detection ----------
+invariant:
+  variance_percentile_threshold: 25      # dims with variance <= this percentile = invariant
+  default_epsilon:               0.03
+
+# ---------- Phase 3: gonzo diagnosis ----------
+gonzo:
+  default_iterations:    12
+  variance_threshold:    0.05            # relative variance above this = gonzo
+  smoothing_window:      3
+  trend_relative_threshold: 0.05
+
+# ---------- Phase 4: Monte Carlo modalities ----------
+monte_carlo:
+  default_n:        5000
+  default_seed:     1
+  reverse_copy_base: 1000
+  adverse_epsilon_max: 1.5
+  subverse_default_statistic: mean
+  microversal_levels: 12
+  microversal_delta_start: 1.0
+  retroverse_default_censor: 0.30
+  extroverse_default_alpha: -1   # -1 = auto via KL-min search
+
+# ---------- Phase 5: homeostasis ----------
+homeostasis:
+  default_epsilon: 0.03
+
+# ---------- rupture trigger ----------
+rupture:
+  patience: 4
+  epsilon:  0.03
+  default_magnitude: 1.0
+
+# ---------- coraline ----------
+coraline:
+  isometric_threshold:  0.85
+  isomorphic_threshold: 0.85
+
+# ---------- ESL provenance seal ----------
+provenance:
+  hash_primitive: SHAKE256
+  hash_output_bits: 512
+  salt_construction: Epoch-Rule30-Salt-Stream
+  rule30_width_bits: 257
+  default_temperature: 1.0

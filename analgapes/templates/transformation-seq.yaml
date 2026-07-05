@@ -1,0 +1,42 @@
+# cta-v1 :: templates/transformation-seq.yaml
+# Reusable transformation sequences for invariant_detect.sh and gonzo_check.sh.
+# License: ESL-ANCSA-MRA-IndiModSHA v1.0
+
+# DSL reference (from lib/transforms.sh):
+#   identity                  no-op
+#   negate:i / mirror:i       flip sign of dim i (0-indexed)
+#   scale:i:k                 multiply dim i by k
+#   shift:i:k                 add k to dim i
+#   swap:i:j                  swap dims
+#   permute:p0,p1,...         reorder
+#   rotate:i:j:theta          rotate dims i,j by theta radians
+#   noise:sigma               Gaussian noise to every dim
+#   scale_all:k / shift_all:k apply to every dim
+
+reflection_pair:
+  description: "mirror x then mirror y — preserves all dims except 0,1"
+  transforms:
+    - negate:0
+    - negate:1
+
+doubling:
+  description: "uniform doubling — classic diverging gonzo operator"
+  transforms:
+    - scale_all:2
+
+octagon_orbit:
+  description: "π/4 rotation in (0,1) plane — stable orbit"
+  transforms:
+    - rotate:0:1:0.785398
+
+simulated_drift:
+  description: "small Gaussian noise — for testing stability"
+  transforms:
+    - noise:0.05
+    - noise:0.05
+    - noise:0.05
+
+golden_ratio_scale:
+  description: "scale dim 1 by φ, leave others fixed"
+  transforms:
+    - scale:1:1.618033988

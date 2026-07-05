@@ -1,0 +1,68 @@
+SHELL      = /bin/bash
+WORKSPACE  ?= /home/user/A51/avrs-cybernetic
+SEALS_DIR  = $(WORKSPACE)/seals
+PROV_FILE  = $(WORKSPACE)/results/provenance_chain.txt
+PROV_SIG   = $(PROV_FILE).sha256
+TIMESTAMP  = $(shell date -Iseconds)
+
+.PHONY: all seal provenance verify witness clean
+
+all: seal provenance
+
+seal:
+	@mkdir -p $(SEALS_DIR)
+	@shopt -s nullglob; \
+	for pattern in \
+	    "$(WORKSPACE)/results/*.log" \
+	    "$(WORKSPACE)/results/*.bin" \
+	    "$(WORKSPACE)/results/*.txt" \
+	    "$(WORKSPACE)/data/memory/*.txt" \
+	    "$(WORKSPACE)/data/memory/*.json" \
+	    "$(WORKSPACE)/kerebral/*.txt" \
+	    "$(WORKSPACE)/kerebral/*.pl"; do \
+	    for f in $$pattern; do \
+	        [ -f "$$f" ] || continue; \
+	        rel=$$(realpath --relative-to="$(WORKSPACE)" "$$f"); \
+	        sha256sum "$$f" > \
+	            "$(SEALS_DIR)/$$(echo "$$rel" | tr '/' '_').seal"; \
+	        echo "[KEEL] sealed: $$rel"; \
+	    done; \
+	done
+
+provenance:
+	@mkdir -p $(WORKSPACE)/results
+	@{ \
+	    echo "=== KEEL PROVENANCE CHAIN ==="; \
+	    echo "Timestamp: $(TIMESTAMP)"; \
+	    echo "Workspace: $(WORKSPACE)"; \
+	    echo "Host: $$(hostname)"; \
+	    echo "User: $$(whoami)"; \
+	    echo "Authorization: Google Bug Hunters VRP"; \
+	} > $(PROV_FILE)
+	@sha256sum $(PROV_FILE) | cut -d' ' -f1 > $(PROV_SIG)
+	@echo "[KEEL] Provenance written. SHA256: $$(cat $(PROV_SIG))"
+
+verify:
+	@failed=0; \
+	for seal in $(SEALS_DIR)/*.seal; do \
+	    [ -f "$$seal" ] || continue; \
+	    read hash path _ < "$$seal"; \
+	    orig="$(WORKSPACE)/$$path"; \
+	    if [ -f "$$orig" ]; then \
+	        echo "$$hash  $$orig" | sha256sum -c --status 2>/dev/null || \
+	            { echo "[KEEL] FAIL: $$orig"; failed=1; }; \
+	    else \
+	        echo "[KEEL] MISSING: $$orig"; failed=1; \
+	    fi; \
+	done; \
+	[ $$failed -eq 0 ] && echo "[KEEL] All seals verified." || \
+	    { echo "[KEEL] Verification failed."; exit 1; }
+
+witness:
+	@echo "Witness: $$(date +%s) $$(whoami)@$$(hostname)" >> $(PROV_FILE)
+	@sha256sum $(PROV_FILE) | cut -d' ' -f1 > $(PROV_SIG)
+	@echo "[KEEL] Witness appended."
+
+clean:
+	@rm -f $(SEALS_DIR)/*.seal $(PROV_FILE) $(PROV_SIG)
+	@echo "[KEEL] Cleaned."

@@ -1,0 +1,60 @@
+#!/usr/bin/env bpftrace
+// shmget_probe.bt — Detect ephemeral helper processes using shared memory IPC
+// Based on doc 5: even short-lived helpers must call shmget; observable.
+// Pairs with helper_detector.pl which consumes this output.
+// SPDX-License-Identifier: GPL-3.0-or-later
+//
+// Run as: sudo bpftrace shmget_probe.bt
+//   or:   sudo bpftrace shmget_probe.bt > shmget.log
+
+BEGIN {
+    printf("# SHMGET_PROBE_ACTIVE epoch=%lu\n", nsecs/1000000000);
+    printf("# event_kind ts_ns pid ppid uid comm key_or_path arg2 arg3\n");
+}
+
+// Track shmget — the IPC handshake the C2 channel needs
+tracepoint:syscalls:sys_enter_shmget {
+    printf("SHMGET %llu %d %d %d %s 0x%lx %ld %ld\n",
+        nsecs, pid, ppid, uid, comm,
+        args->key, args->size, args->shmflg);
+}
+
+// Track shmat — attaching to an existing segment is the actual exfil moment
+tracepoint:syscalls:sys_enter_shmat {
+    printf("SHMAT %llu %d %d %d %s shmid=%d 0x%lx %ld\n",
+        nsecs, pid, ppid, uid, comm,
+        args->shmid, args->shmaddr, args->shmflg);
+}
+
+// Track memfd_create — the doc 3 "anonymous file in RAM" technique
+tracepoint:syscalls:sys_enter_memfd_create {
+    printf("MEMFD_CREATE %llu %d %d %d %s name=%s flags=0x%lx 0\n",
+        nsecs, pid, ppid, uid, comm,
+        str(args->uname), args->flags);
+}
+
+// Track execve — correlate with shmget to find helper processes
+tracepoint:syscalls:sys_enter_execve {
+    printf("EXECVE %llu %d %d %d %s %s 0 0\n",
+        nsecs, pid, ppid, uid, comm,
+        str(args->filename));
+}
+
+// Track ptrace — doc 3 reflective ELF injection method
+tracepoint:syscalls:sys_enter_ptrace {
+    if (args->request == 4 || args->request == 5) {  // POKETEXT, POKEDATA
+        printf("PTRACE_POKE %llu %d %d %d %s req=%ld target_pid=%ld 0\n",
+            nsecs, pid, ppid, uid, comm,
+            args->request, args->pid);
+    }
+}
+
+// Process exit — for short-lived helper detection
+tracepoint:sched:sched_process_exit {
+    printf("EXIT %llu %d %d %d %s _ 0 0\n",
+        nsecs, pid, ppid, uid, comm);
+}
+
+END {
+    printf("# SHMGET_PROBE_END epoch=%lu\n", nsecs/1000000000);
+}

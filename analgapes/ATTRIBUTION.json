@@ -1,0 +1,42 @@
+{
+  "name": "analgapes",
+  "long_name": "Accelerated Novel Adversarial Lifting, Generating, Architectural Pattern Engagement System",
+  "version": "3.1.0",
+  "license": "ESL-ANCSA-MRA-IndiModSHA-1.0",
+  "original_creator": "Anja Evermoor",
+  "handle": "@161evermoorFAFO / @gravermistakes",
+  "co_authors": [
+    {
+      "name": "Weft",
+      "role": "co-author",
+      "contribution": "cellular integration, primitive scaffolding, test discipline, edge-name schema, language analysis"
+    }
+  ],
+  "dissolved_into_this": [
+    "cta-v1 (v1.0)",
+    "route-cause (Wave 0 snapshot)",
+    "avrs-supervisor (v2.3)",
+    "avrs-supervisor-v2-5-integrated (v2.5)",
+    "avrs-dusk2dawn (skeleton substrate)"
+  ],
+  "deleted_concepts": [
+    "DAO / democratic process (voting, quorum, proposal types)",
+    "disclosure-window policy enforcement (per-engagement, not hardcoded)",
+    "Python implementations (replaced per language-fit analysis)",
+    "model-identifier / trademark naming in shipped artifacts"
+  ],
+  "languages": [
+    "C",
+    "Ada/SPARK",
+    "Perl",
+    "R",
+    "Prolog",
+    "Erlang/OTP",
+    "bash"
+  ],
+  "provenance_seal": {
+    "primitive": "SHAKE256-xoflen-64",
+    "hex_seal": "557357accea45f452c8f15680333b24a4ea47a30f663e444e8a7496552797d3ab3610ea74d0684caa4c025c250e94835bc9e0c9236e20b07b974df1a595ed9e0",
+    "epoch": 1780992981
+  }
+}
