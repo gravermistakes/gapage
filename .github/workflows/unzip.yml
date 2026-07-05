@@ -40,7 +40,8 @@ jobs:
           echo "ZIP files to unzip:"
           echo "$CHANGED_ZIPS"
 
-          STAGED_DIRS=""
+          # Use a temp file to pass staged dirs to the next step (handles spaces in names)
+          STAGED_DIRS_FILE=$(mktemp)
 
           while IFS= read -r ZIP_FILE; do
             # Strip leading ./ if present
@@ -53,30 +54,37 @@ jobs:
             ZIP_DIR=$(dirname "$ZIP_FILE")
             ZIP_NAME=$(basename "$ZIP_FILE" .zip)
             DEST_DIR="$ZIP_DIR/$ZIP_NAME"
+            REAL_DEST=$(realpath -m "$DEST_DIR")
+
+            # Validate all paths in the ZIP before extracting (path traversal protection)
+            echo "Validating '$ZIP_FILE'..."
+            BAD_PATH=0
+            while IFS= read -r ENTRY; do
+              REAL_ENTRY=$(realpath -m "$REAL_DEST/$ENTRY")
+              if [[ "$REAL_ENTRY" != "$REAL_DEST"* ]]; then
+                echo "Error: Entry '$ENTRY' in '$ZIP_FILE' would escape destination. Skipping archive."
+                BAD_PATH=1
+                break
+              fi
+            done < <(unzip -Z1 "$ZIP_FILE")
+
+            if [ "$BAD_PATH" -eq 1 ]; then
+              continue
+            fi
 
             echo "Unzipping '$ZIP_FILE' into '$DEST_DIR'..."
             mkdir -p "$DEST_DIR"
             unzip -o "$ZIP_FILE" -d "$DEST_DIR"
 
-            # Validate that no extracted path escapes the destination directory
-            while IFS= read -r EXTRACTED; do
-              REAL_DEST=$(realpath "$DEST_DIR")
-              REAL_EXTRACTED=$(realpath "$EXTRACTED" 2>/dev/null || echo "")
-              if [ -n "$REAL_EXTRACTED" ] && [[ "$REAL_EXTRACTED" != "$REAL_DEST"* ]]; then
-                echo "Error: Extracted path '$EXTRACTED' escapes destination '$DEST_DIR'. Aborting."
-                exit 1
-              fi
-            done < <(find "$DEST_DIR" -mindepth 1)
-
-            STAGED_DIRS="$STAGED_DIRS $DEST_DIR"
+            echo "$DEST_DIR" >> "$STAGED_DIRS_FILE"
           done <<< "$CHANGED_ZIPS"
 
-          # Export staged dirs for use in the next step
-          echo "STAGED_DIRS=$STAGED_DIRS" >> "$GITHUB_ENV"
+          # Export path to staged dirs list for use in the next step
+          echo "STAGED_DIRS_FILE=$STAGED_DIRS_FILE" >> "$GITHUB_ENV"
 
       - name: Commit and push unzipped files
         run: |
-          if [ -z "$STAGED_DIRS" ]; then
+          if [ -z "$STAGED_DIRS_FILE" ] || [ ! -s "$STAGED_DIRS_FILE" ]; then
             echo "Nothing to commit."
             exit 0
           fi
@@ -85,13 +93,14 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           # Stage only the directories produced by unzipping
-          for DIR in $STAGED_DIRS; do
+          while IFS= read -r DIR; do
             git add "$DIR"
-          done
+          done < "$STAGED_DIRS_FILE"
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore: unzip archives from ${GITHUB_SHA:0:7} [skip ci]"
+            SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
+            git commit -m "chore: unzip archives from ${SHORT_SHA} [skip ci]"
             git push
           fi
