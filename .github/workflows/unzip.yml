@@ -1,0 +1,106 @@
+name: Automated Unzipping
+
+on:
+  push:
+    paths:
+      - '**.zip'
+
+jobs:
+  unzip:
+    # Skip commits created by this workflow to prevent infinite loops
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find and unzip new ZIP files
+        run: |
+          BEFORE="${{ github.event.before }}"
+          SHA="${{ github.sha }}"
+
+          # On first push to a branch, 'before' is all zeros — list all tracked ZIP files instead
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "First push to branch — scanning all tracked ZIP files."
+            CHANGED_ZIPS=$(git ls-files '*.zip' || true)
+          else
+            CHANGED_ZIPS=$(git diff --name-only --diff-filter=AM "$BEFORE" "$SHA" | grep '\.zip$' || true)
+          fi
+
+          if [ -z "$CHANGED_ZIPS" ]; then
+            echo "No ZIP files changed in this push."
+            exit 0
+          fi
+
+          echo "ZIP files to unzip:"
+          echo "$CHANGED_ZIPS"
+
+          # Use a temp file to pass staged dirs to the next step (handles spaces in names)
+          STAGED_DIRS_FILE=$(mktemp)
+
+          while IFS= read -r ZIP_FILE; do
+            # Strip leading ./ if present
+            ZIP_FILE="${ZIP_FILE#./}"
+            if [ ! -f "$ZIP_FILE" ]; then
+              echo "Warning: '$ZIP_FILE' not found, skipping."
+              continue
+            fi
+
+            ZIP_DIR=$(dirname "$ZIP_FILE")
+            ZIP_NAME=$(basename "$ZIP_FILE" .zip)
+            DEST_DIR="$ZIP_DIR/$ZIP_NAME"
+            REAL_DEST=$(realpath -m "$DEST_DIR")
+
+            # Validate all paths in the ZIP before extracting (path traversal protection)
+            echo "Validating '$ZIP_FILE'..."
+            BAD_PATH=0
+            while IFS= read -r ENTRY; do
+              REAL_ENTRY=$(realpath -m "$REAL_DEST/$ENTRY")
+              if [[ "$REAL_ENTRY" != "$REAL_DEST"* ]]; then
+                echo "Error: Entry '$ENTRY' in '$ZIP_FILE' would escape destination. Skipping archive."
+                BAD_PATH=1
+                break
+              fi
+            done < <(unzip -Z1 "$ZIP_FILE")
+
+            if [ "$BAD_PATH" -eq 1 ]; then
+              continue
+            fi
+
+            echo "Unzipping '$ZIP_FILE' into '$DEST_DIR'..."
+            mkdir -p "$DEST_DIR"
+            unzip -o "$ZIP_FILE" -d "$DEST_DIR"
+
+            echo "$DEST_DIR" >> "$STAGED_DIRS_FILE"
+          done <<< "$CHANGED_ZIPS"
+
+          # Export path to staged dirs list for use in the next step
+          echo "STAGED_DIRS_FILE=$STAGED_DIRS_FILE" >> "$GITHUB_ENV"
+
+      - name: Commit and push unzipped files
+        run: |
+          if [ -z "$STAGED_DIRS_FILE" ] || [ ! -s "$STAGED_DIRS_FILE" ]; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage only the directories produced by unzipping
+          while IFS= read -r DIR; do
+            git add "$DIR"
+          done < "$STAGED_DIRS_FILE"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            SHORT_SHA=$(echo "$GITHUB_SHA" | cut -c1-7)
+            git commit -m "chore: unzip archives from ${SHORT_SHA} [skip ci]"
+            git push
+          fi
