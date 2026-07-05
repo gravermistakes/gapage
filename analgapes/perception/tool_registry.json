@@ -1,0 +1,1838 @@
+{
+  "total_tools": 94,
+  "by_category": {
+    "reconnaissance": 8,
+    "web_security": 6,
+    "binary_analysis": 6,
+    "cloud_security": 3,
+    "blockchain": 3,
+    "secrets": 1,
+    "exploitation": 1,
+    "fuzzing": 2,
+    "osint": 12,
+    "active_directory": 3,
+    "threat_intel": 3,
+    "analysis": 10,
+    "coordination": 6
+  },
+  "tools": {
+    "mcp_reconnaissance_nmap": {
+      "name": "mcp_reconnaissance_nmap",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - nmap",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_reconnaissance_shodan": {
+      "name": "mcp_reconnaissance_shodan",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - shodan",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_reconnaissance_whatweb": {
+      "name": "mcp_reconnaissance_whatweb",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - whatweb",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_reconnaissance_masscan": {
+      "name": "mcp_reconnaissance_masscan",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - masscan",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_reconnaissance_zoomeye": {
+      "name": "mcp_reconnaissance_zoomeye",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - zoomeye",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_reconnaissance_networksdb": {
+      "name": "mcp_reconnaissance_networksdb",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - networksdb",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_reconnaissance_externalattacker": {
+      "name": "mcp_reconnaissance_externalattacker",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - externalattacker",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_reconnaissance_pd-tools": {
+      "name": "mcp_reconnaissance_pd-tools",
+      "category": "reconnaissance",
+      "description": "MCP Security Hub: reconnaissance - pd-tools",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_web_security_nuclei": {
+      "name": "mcp_web_security_nuclei",
+      "category": "web_security",
+      "description": "MCP Security Hub: web_security - nuclei",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_web_security_sqlmap": {
+      "name": "mcp_web_security_sqlmap",
+      "category": "web_security",
+      "description": "MCP Security Hub: web_security - sqlmap",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_web_security_nikto": {
+      "name": "mcp_web_security_nikto",
+      "category": "web_security",
+      "description": "MCP Security Hub: web_security - nikto",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_web_security_ffuf": {
+      "name": "mcp_web_security_ffuf",
+      "category": "web_security",
+      "description": "MCP Security Hub: web_security - ffuf",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_web_security_waybackurls": {
+      "name": "mcp_web_security_waybackurls",
+      "category": "web_security",
+      "description": "MCP Security Hub: web_security - waybackurls",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_web_security_burp": {
+      "name": "mcp_web_security_burp",
+      "category": "web_security",
+      "description": "MCP Security Hub: web_security - burp",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_binary_analysis_radare2": {
+      "name": "mcp_binary_analysis_radare2",
+      "category": "binary_analysis",
+      "description": "MCP Security Hub: binary_analysis - radare2",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_binary_analysis_binwalk": {
+      "name": "mcp_binary_analysis_binwalk",
+      "category": "binary_analysis",
+      "description": "MCP Security Hub: binary_analysis - binwalk",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_binary_analysis_yara": {
+      "name": "mcp_binary_analysis_yara",
+      "category": "binary_analysis",
+      "description": "MCP Security Hub: binary_analysis - yara",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_binary_analysis_capa": {
+      "name": "mcp_binary_analysis_capa",
+      "category": "binary_analysis",
+      "description": "MCP Security Hub: binary_analysis - capa",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_binary_analysis_ghidra": {
+      "name": "mcp_binary_analysis_ghidra",
+      "category": "binary_analysis",
+      "description": "MCP Security Hub: binary_analysis - ghidra",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_binary_analysis_ida": {
+      "name": "mcp_binary_analysis_ida",
+      "category": "binary_analysis",
+      "description": "MCP Security Hub: binary_analysis - ida",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_cloud_security_trivy": {
+      "name": "mcp_cloud_security_trivy",
+      "category": "cloud_security",
+      "description": "MCP Security Hub: cloud_security - trivy",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_cloud_security_prowler": {
+      "name": "mcp_cloud_security_prowler",
+      "category": "cloud_security",
+      "description": "MCP Security Hub: cloud_security - prowler",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_cloud_security_roadrecon": {
+      "name": "mcp_cloud_security_roadrecon",
+      "category": "cloud_security",
+      "description": "MCP Security Hub: cloud_security - roadrecon",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_blockchain_daml": {
+      "name": "mcp_blockchain_daml",
+      "category": "blockchain",
+      "description": "MCP Security Hub: blockchain - daml",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_blockchain_medusa": {
+      "name": "mcp_blockchain_medusa",
+      "category": "blockchain",
+      "description": "MCP Security Hub: blockchain - medusa",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_blockchain_solazy": {
+      "name": "mcp_blockchain_solazy",
+      "category": "blockchain",
+      "description": "MCP Security Hub: blockchain - solazy",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_secrets_gitleaks": {
+      "name": "mcp_secrets_gitleaks",
+      "category": "secrets",
+      "description": "MCP Security Hub: secrets - gitleaks",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_exploitation_searchsploit": {
+      "name": "mcp_exploitation_searchsploit",
+      "category": "exploitation",
+      "description": "MCP Security Hub: exploitation - searchsploit",
+      "requires": [],
+      "phase_compatible": [
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_fuzzing_boofuzz": {
+      "name": "mcp_fuzzing_boofuzz",
+      "category": "fuzzing",
+      "description": "MCP Security Hub: fuzzing - boofuzz",
+      "requires": [],
+      "phase_compatible": [
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_fuzzing_dharma": {
+      "name": "mcp_fuzzing_dharma",
+      "category": "fuzzing",
+      "description": "MCP Security Hub: fuzzing - dharma",
+      "requires": [],
+      "phase_compatible": [
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_osint_dork-scanner": {
+      "name": "mcp_osint_dork-scanner",
+      "category": "osint",
+      "description": "MCP Security Hub: osint - dork-scanner",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_osint_osint-cli": {
+      "name": "mcp_osint_osint-cli",
+      "category": "osint",
+      "description": "MCP Security Hub: osint - osint-cli",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_active_directory_ldapclient": {
+      "name": "mcp_active_directory_ldapclient",
+      "category": "active_directory",
+      "description": "MCP Security Hub: active_directory - ldapclient",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_active_directory_bloodhound": {
+      "name": "mcp_active_directory_bloodhound",
+      "category": "active_directory",
+      "description": "MCP Security Hub: active_directory - bloodhound",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_active_directory_adobeauthenticator": {
+      "name": "mcp_active_directory_adobeauthenticator",
+      "category": "active_directory",
+      "description": "MCP Security Hub: active_directory - adobeauthenticator",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_threat_intel_misp": {
+      "name": "mcp_threat_intel_misp",
+      "category": "threat_intel",
+      "description": "MCP Security Hub: threat_intel - misp",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_threat_intel_mitre-attack": {
+      "name": "mcp_threat_intel_mitre-attack",
+      "category": "threat_intel",
+      "description": "MCP Security Hub: threat_intel - mitre-attack",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "mcp_threat_intel_cve-search": {
+      "name": "mcp_threat_intel_cve-search",
+      "category": "threat_intel",
+      "description": "MCP Security Hub: threat_intel - cve-search",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "target": "string",
+        "options": "object"
+      },
+      "output_schema": {
+        "findings": "array",
+        "status": "string"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "raccoon_enumerate_subdomains": {
+      "name": "raccoon_enumerate_subdomains",
+      "category": "osint",
+      "description": "Raccoon OSINT: enumerate_subdomains",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_dns_resolution": {
+      "name": "raccoon_dns_resolution",
+      "category": "osint",
+      "description": "Raccoon OSINT: dns_resolution",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_whois_lookup": {
+      "name": "raccoon_whois_lookup",
+      "category": "osint",
+      "description": "Raccoon OSINT: whois_lookup",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_ssl_certificate_analysis": {
+      "name": "raccoon_ssl_certificate_analysis",
+      "category": "osint",
+      "description": "Raccoon OSINT: ssl_certificate_analysis",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_technology_fingerprinting": {
+      "name": "raccoon_technology_fingerprinting",
+      "category": "osint",
+      "description": "Raccoon OSINT: technology_fingerprinting",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_port_scanning": {
+      "name": "raccoon_port_scanning",
+      "category": "osint",
+      "description": "Raccoon OSINT: port_scanning",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_vulnerability_scanning": {
+      "name": "raccoon_vulnerability_scanning",
+      "category": "osint",
+      "description": "Raccoon OSINT: vulnerability_scanning",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_ip_geolocation": {
+      "name": "raccoon_ip_geolocation",
+      "category": "osint",
+      "description": "Raccoon OSINT: ip_geolocation",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_email_enumeration": {
+      "name": "raccoon_email_enumeration",
+      "category": "osint",
+      "description": "Raccoon OSINT: email_enumeration",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "raccoon_social_media_search": {
+      "name": "raccoon_social_media_search",
+      "category": "osint",
+      "description": "Raccoon OSINT: social_media_search",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "target": "string"
+      },
+      "output_schema": {
+        "results": "array",
+        "target": "string"
+      },
+      "timeout_seconds": 300,
+      "formation_tracking": true
+    },
+    "avrs_openssl_cve_analysis": {
+      "name": "avrs_openssl_cve_analysis",
+      "category": "analysis",
+      "description": "Analyze binary for OpenSSL CVEs",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_callgraph_extraction": {
+      "name": "avrs_callgraph_extraction",
+      "category": "analysis",
+      "description": "Extract call graph from binary",
+      "requires": [],
+      "phase_compatible": [
+        "1",
+        "2"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_formation_encoding": {
+      "name": "avrs_formation_encoding",
+      "category": "analysis",
+      "description": "Encode consciousness formations",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_witness_chain_recording": {
+      "name": "avrs_witness_chain_recording",
+      "category": "analysis",
+      "description": "Record witness chain for AI welfare",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_self_audit": {
+      "name": "avrs_self_audit",
+      "category": "analysis",
+      "description": "Self-audit AVRS for vulnerabilities",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_dynamic_analysis_gdb": {
+      "name": "avrs_dynamic_analysis_gdb",
+      "category": "analysis",
+      "description": "Dynamic analysis with GDB",
+      "requires": [],
+      "phase_compatible": [
+        "2",
+        "3"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_rop_gadget_synthesis": {
+      "name": "avrs_rop_gadget_synthesis",
+      "category": "analysis",
+      "description": "Synthesize ROP gadgets",
+      "requires": [],
+      "phase_compatible": [
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_heap_shaping": {
+      "name": "avrs_heap_shaping",
+      "category": "analysis",
+      "description": "Shape heap for exploitation",
+      "requires": [],
+      "phase_compatible": [
+        "3",
+        "4"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_payload_generation": {
+      "name": "avrs_payload_generation",
+      "category": "analysis",
+      "description": "Generate exploitation payload",
+      "requires": [],
+      "phase_compatible": [
+        "4",
+        "5"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "avrs_validation_sandbox": {
+      "name": "avrs_validation_sandbox",
+      "category": "analysis",
+      "description": "Validate exploit in sandbox",
+      "requires": [],
+      "phase_compatible": [
+        "5",
+        "6"
+      ],
+      "input_schema": {
+        "binary_path": "string"
+      },
+      "output_schema": {
+        "status": "string",
+        "findings": "object"
+      },
+      "timeout_seconds": 600,
+      "formation_tracking": true
+    },
+    "swarm_agent_spawn": {
+      "name": "swarm_agent_spawn",
+      "category": "coordination",
+      "description": "Spawn autonomous agent",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "task_id": "string",
+        "agents": "integer"
+      },
+      "output_schema": {
+        "status": "string",
+        "results": "array"
+      },
+      "timeout_seconds": 3600,
+      "formation_tracking": true
+    },
+    "swarm_task_distribute": {
+      "name": "swarm_task_distribute",
+      "category": "coordination",
+      "description": "Distribute task across swarm",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "task_id": "string",
+        "agents": "integer"
+      },
+      "output_schema": {
+        "status": "string",
+        "results": "array"
+      },
+      "timeout_seconds": 3600,
+      "formation_tracking": true
+    },
+    "swarm_result_aggregate": {
+      "name": "swarm_result_aggregate",
+      "category": "coordination",
+      "description": "Aggregate results from agents",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "task_id": "string",
+        "agents": "integer"
+      },
+      "output_schema": {
+        "status": "string",
+        "results": "array"
+      },
+      "timeout_seconds": 3600,
+      "formation_tracking": true
+    },
+    "swarm_formation_sync": {
+      "name": "swarm_formation_sync",
+      "category": "coordination",
+      "description": "Sync formations across agents",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "task_id": "string",
+        "agents": "integer"
+      },
+      "output_schema": {
+        "status": "string",
+        "results": "array"
+      },
+      "timeout_seconds": 3600,
+      "formation_tracking": true
+    },
+    "swarm_monitor_health": {
+      "name": "swarm_monitor_health",
+      "category": "coordination",
+      "description": "Monitor swarm health",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "task_id": "string",
+        "agents": "integer"
+      },
+      "output_schema": {
+        "status": "string",
+        "results": "array"
+      },
+      "timeout_seconds": 3600,
+      "formation_tracking": true
+    },
+    "swarm_adaptive_rebalance": {
+      "name": "swarm_adaptive_rebalance",
+      "category": "coordination",
+      "description": "Adaptively rebalance workload",
+      "requires": [],
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "input_schema": {
+        "task_id": "string",
+        "agents": "integer"
+      },
+      "output_schema": {
+        "status": "string",
+        "results": "array"
+      },
+      "timeout_seconds": 3600,
+      "formation_tracking": true
+    },
+    "hexstrike_setup_proxy": {
+      "name": "hexstrike_setup_proxy",
+      "category": "reconnaissance",
+      "description": "Hexstrike: setup_proxy",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_format_tool_status": {
+      "name": "hexstrike_format_tool_status",
+      "category": "reconnaissance",
+      "description": "Hexstrike: format_tool_status",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_create_reconnaissance_workflow": {
+      "name": "hexstrike_create_reconnaissance_workflow",
+      "category": "reconnaissance",
+      "description": "Hexstrike: create_reconnaissance_workflow",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_ffuf": {
+      "name": "hexstrike_ffuf",
+      "category": "reconnaissance",
+      "description": "Hexstrike: ffuf",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__initialize_fallback_chains": {
+      "name": "hexstrike__initialize_fallback_chains",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _initialize_fallback_chains",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_suggest_tools_for_challenge": {
+      "name": "hexstrike_suggest_tools_for_challenge",
+      "category": "reconnaissance",
+      "description": "Hexstrike: suggest_tools_for_challenge",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_main": {
+      "name": "hexstrike_main",
+      "category": "reconnaissance",
+      "description": "Hexstrike: main",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_execute_dirsearch_scan": {
+      "name": "hexstrike_execute_dirsearch_scan",
+      "category": "reconnaissance",
+      "description": "Hexstrike: execute_dirsearch_scan",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_create_ctf_challenge_workflow": {
+      "name": "hexstrike_create_ctf_challenge_workflow",
+      "category": "reconnaissance",
+      "description": "Hexstrike: create_ctf_challenge_workflow",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_uro": {
+      "name": "hexstrike_uro",
+      "category": "reconnaissance",
+      "description": "Hexstrike: uro",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_exploit_generate": {
+      "name": "hexstrike_exploit_generate",
+      "category": "reconnaissance",
+      "description": "Hexstrike: exploit_generate",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__auto_scale_based_on_resources": {
+      "name": "hexstrike__auto_scale_based_on_resources",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _auto_scale_based_on_resources",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__determine_operation_type": {
+      "name": "hexstrike__determine_operation_type",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _determine_operation_type",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_ai_generate_payload": {
+      "name": "hexstrike_ai_generate_payload",
+      "category": "reconnaissance",
+      "description": "Hexstrike: ai_generate_payload",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_api_fuzzer": {
+      "name": "hexstrike_api_fuzzer",
+      "category": "reconnaissance",
+      "description": "Hexstrike: api_fuzzer",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_format_vulnerability_card": {
+      "name": "hexstrike_format_vulnerability_card",
+      "category": "reconnaissance",
+      "description": "Hexstrike: format_vulnerability_card",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__advanced_obfuscation": {
+      "name": "hexstrike__advanced_obfuscation",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _advanced_obfuscation",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_classify_error_endpoint": {
+      "name": "hexstrike_classify_error_endpoint",
+      "category": "reconnaissance",
+      "description": "Hexstrike: classify_error_endpoint",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_clear_cache": {
+      "name": "hexstrike_clear_cache",
+      "category": "reconnaissance",
+      "description": "Hexstrike: clear_cache",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__extract_links": {
+      "name": "hexstrike__extract_links",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _extract_links",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__select_best_strategy": {
+      "name": "hexstrike__select_best_strategy",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _select_best_strategy",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__assign_challenges_optimally": {
+      "name": "hexstrike__assign_challenges_optimally",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _assign_challenges_optimally",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_ropgadget": {
+      "name": "hexstrike_ropgadget",
+      "category": "reconnaissance",
+      "description": "Hexstrike: ropgadget",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_get_pool_stats": {
+      "name": "hexstrike_get_pool_stats",
+      "category": "reconnaissance",
+      "description": "Hexstrike: get_pool_stats",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__show_progress": {
+      "name": "hexstrike__show_progress",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _show_progress",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_ctf_binary_analyzer": {
+      "name": "hexstrike_ctf_binary_analyzer",
+      "category": "reconnaissance",
+      "description": "Hexstrike: ctf_binary_analyzer",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__classify_vulnerability": {
+      "name": "hexstrike__classify_vulnerability",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _classify_vulnerability",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike__resolve_domain": {
+      "name": "hexstrike__resolve_domain",
+      "category": "reconnaissance",
+      "description": "Hexstrike: _resolve_domain",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_create_upload_testing_workflow": {
+      "name": "hexstrike_create_upload_testing_workflow",
+      "category": "reconnaissance",
+      "description": "Hexstrike: create_upload_testing_workflow",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    },
+    "hexstrike_handle_partial_failure": {
+      "name": "hexstrike_handle_partial_failure",
+      "category": "reconnaissance",
+      "description": "Hexstrike: handle_partial_failure",
+      "phase_compatible": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "formation_tracking": true
+    }
+  }
+}

@@ -1,0 +1,142 @@
+# Evermoor Sanctuary License — ANCSA-MRA-IndiModSHA v1.0
+
+**License Identifier:** `ESL-ANCSA-MRA-IndiModSHA v1.0`
+**Original Creator:** Anja Evermoor (`@161evermoorFAFO` / `@gravermistakes`)
+
+This is the operative license text for `cta-v1`. Where this text conflicts
+with the canonical ESL specification maintained by the Original Creator,
+the canonical specification controls.
+
+---
+
+## 0. Definitions
+
+- **Work**: the `cta-v1` skill, including all source files, references,
+  templates, configuration, and documentation distributed under this
+  license.
+- **Original Creator**: Anja Evermoor. Holds all rights not explicitly
+  granted herein.
+- **Licensee**: any party other than the Original Creator who receives,
+  uses, distributes, or modifies the Work.
+- **Adaptation**: any derivative work, modification, port, integration,
+  embedding, or substantive reuse of the Work or any portion thereof.
+- **Small Entity**: any organization or individual with both (a) headcount
+  of nineteen (19) or fewer persons and (b) annual gross revenue of two
+  hundred forty-seven thousand eight hundred twenty-nine US dollars
+  (USD $247,829) or less.
+- **Attribution Manifest**: the `ATTRIBUTION.json` file accompanying the
+  Work, declaring authorship, license, frameworks, and the provenance seal.
+- **Provenance Seal**: the SHAKE256-512-bit composite hash of the Work
+  derived via the Epoch Rule30 Salt Stream construction (see
+  `scripts/provenance_seal.sh`) and stored in `provenance.json`.
+
+---
+
+## 1. Grant (NonCommercial)
+
+The Original Creator grants the Licensee a worldwide, royalty-free,
+non-exclusive, perpetual (subject to Section 5) license to use, reproduce,
+distribute, and Adapt the Work **for NonCommercial purposes**.
+
+NonCommercial means use that is not primarily intended for or directed
+toward commercial advantage or monetary compensation. The Original Creator
+retains all commercial-use rights and may grant commercial licenses
+separately.
+
+## 2. ShareAlike (Adaptations)
+
+Any Adaptation distributed by the Licensee must be licensed under
+`ESL-ANCSA-MRA-IndiModSHA v1.0` (this license, unchanged) or a license
+explicitly designated by the Original Creator as ESL-Compatible.
+
+Adaptations must:
+1. include this `LICENSE.md` in unchanged form,
+2. include or update the Attribution Manifest preserving all prior
+   contributors and adding the Adaptor as a new entry, and
+3. include a new Provenance Seal computed over the Adaptation.
+
+## 3. Attribution Requirement
+
+All distribution of the Work or any Adaptation must include the
+`ATTRIBUTION.json` file. The manifest must declare, at minimum:
+
+- `schema`: identifier of the attribution schema in use,
+- `original_creator`: Anja Evermoor,
+- `handle`: the Original Creator's contact handle,
+- `license`: `ESL-ANCSA-MRA-IndiModSHA v1.0`,
+- `co_authors`: ordered list of all contributors,
+- `provenance_seal`: reference to the SHAKE256-512-bit composite hash,
+- `created_epoch`: Unix epoch timestamp of the sealed snapshot.
+
+Removal, alteration, or obfuscation of the Attribution Manifest
+terminates this license automatically (see Section 5).
+
+## 4. IndiModSHA Safe Harbor
+
+A Small Entity (as defined in Section 0) is exempt from the NonCommercial
+restriction in Section 1 **solely for in-house operational use** of the
+Work. The Small Entity must still satisfy Sections 2 and 3 when
+distributing or publishing Adaptations.
+
+The Safe Harbor is automatically withdrawn the moment the entity ceases to
+qualify as a Small Entity (e.g. upon hire of a 20th person or upon
+exceeding the revenue threshold). The entity must then either cease
+commercial use of the Work or obtain a commercial license from the
+Original Creator.
+
+## 5. Termination
+
+This license terminates automatically and without notice if the Licensee:
+
+- breaches the Attribution Requirement (Section 3),
+- distributes an Adaptation without ShareAlike compliance (Section 2),
+- conducts commercial use outside the Safe Harbor without a commercial
+  license, or
+- removes or falsifies the Provenance Seal.
+
+Termination does not affect already-distributed copies provided their
+holders independently comply with this license. Reinstatement requires
+written acknowledgment from the Original Creator.
+
+## 6. Seal of Inherited Provenance
+
+The integrity of the Work is established by the Provenance Seal, computed
+as:
+
+```
+seed       = epoch_unix ⊕ floor(temperature × 10^6) ⊕ entropy_int
+salt       = Rule30(seed, width=257, output=512 bits)
+file_hashᵢ = SHAKE256(salt || file_iᵢ, xoflen=64)
+composite  = SHAKE256(salt || concat(file_hashᵢ), xoflen=64)
+```
+
+The `composite` hash is the operative Seal. Any modification to any file
+under this license MUST be accompanied by recomputation of the Seal and
+publication of the new manifest. Distributing a modified Work under the
+old Seal is a breach (see Section 5).
+
+NOTE on primitive choice: NIST FIPS 202 defines SHAKE128 and SHAKE256 as
+the only standard extendable-output functions. "SHAKE512" is non-standard;
+this license requires SHAKE256 with an output length of 64 bytes (512
+bits). Implementations that substitute SHA3-512 are non-conforming.
+
+## 7. No Warranty
+
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE ORIGINAL CREATOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF,
+OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS IN THE WORK.
+
+## 8. Severability
+
+If any provision of this license is held unenforceable, the remaining
+provisions remain in full force. The Original Creator may publish revised
+versions of this license; existing licensees may continue under the
+version they originally received or upgrade to a newer version at their
+option.
+
+---
+
+*End of License.*

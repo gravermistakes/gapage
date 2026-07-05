@@ -1,0 +1,79 @@
+# cta-v1 :: config/constraint-templates.yaml
+#
+# Library of common homeostasis constraint sets. Pass one or more constraint
+# strings to homeostasis.sh via --constraint. The syntax is given in the
+# script header; this file collects useful patterns by problem class.
+#
+# License: ESL-ANCSA-MRA-IndiModSHA v1.0
+
+# ---------- probability vector ----------
+# A vector of non-negative values summing to 1.0.
+probability_vector:
+  description: "Vector elements in [0,1] summing to 1.0 — categorical distribution."
+  constraints:
+    - sum:1.0
+    - range:0:1
+
+# ---------- unit vector (L2-normalized) ----------
+unit_vector:
+  description: "Direction vector with L2 norm = 1."
+  constraints:
+    - norm:1.0
+
+# ---------- conservation law ----------
+# E.g. mass/energy/charge conservation: vector sums to a fixed constant.
+conserved:
+  description: "Sum is preserved at a fixed total. Replace 100.0 with your conserved quantity."
+  constraints:
+    - sum:100.0
+
+# ---------- monotone schedule ----------
+# E.g. a learning-rate or temperature schedule that must only decrease.
+monotone_descending:
+  description: "Schedule that must never increase (e.g. cooling, LR decay)."
+  constraints:
+    - monotonic:desc
+
+monotone_ascending:
+  description: "Schedule that must never decrease (e.g. cumulative reward, age)."
+  constraints:
+    - monotonic:asc
+
+# ---------- bounded budget ----------
+budget_bounded:
+  description: "All allocations non-negative, sum within a fixed budget."
+  constraints:
+    - sum:50.0    # adjust to budget
+    - range:0:1   # adjust max per allocation
+
+# ---------- pinned dimension ----------
+# A specific coordinate must equal a target value (e.g. dim 0 = 1 fixes the origin).
+pinned_dim_zero:
+  description: "Dimension 0 is pinned at 1.0; others free."
+  constraints:
+    - dim_equal:0:1.0
+
+# ---------- safe operating region ----------
+# Each dimension constrained to its own range (use multiple dim_in clauses).
+safe_region_3d:
+  description: "3D safe region: dim 0 in [0,10], dim 1 in [-5,5], dim 2 in [0,1]."
+  constraints:
+    - dim_in:0:0:10
+    - dim_in:1:-5:5
+    - dim_in:2:0:1
+
+# ---------- statistical moment preservation ----------
+# When validating that a transform preserves first/second moments.
+moment_preservation:
+  description: "Mean and variance both pinned (use after Adverse / Obverse to check fracture)."
+  constraints:
+    - mean:0.0     # adjust
+    - variance:1.0 # adjust
+
+# ---------- post-synthesis integration check ----------
+# After Phase 6 with synthesis_type=integration, the original two statements
+# should yield identical structure vectors; this validates that.
+integration_invariant:
+  description: "Both input statements must reduce to the same component vector."
+  constraints:
+    - variance:0.0   # variance across the two structure vectors is zero

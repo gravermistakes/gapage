@@ -1,0 +1,23 @@
+# cta-v1 :: templates/audit-log.yaml
+# Schema for the audit log emitted by run_cta.sh at the end of each run.
+# License: ESL-ANCSA-MRA-IndiModSHA v1.0
+
+audit_log:
+  cta_version:       v1.0.0
+  license:           ESL-ANCSA-MRA-IndiModSHA v1.0
+  original_creator:  Anja Evermoor
+  mode:              "<trialectic | dynamics | mc-pipeline | full>"
+  workspace:         "<path>"
+  epoch_start:       1750000000          # unix epoch (per Anja's preference)
+  artifacts:                              # one entry per phase JSON written
+    - path:        "<workspace>/phase1_trialectic.json"
+      phase:       1
+      sha3_512:    "<computed by provenance_seal.sh>"
+    - path:        "<workspace>/phase6_synthesis.json"
+      phase:       6
+      sha3_512:    "<computed>"
+  seal:                                   # present iff --seal was passed
+    path:                       "<workspace>/seal.json"
+    schema:                     ESL-Seal-of-Inherited-Provenance-v1.0
+    composite_seal_shake256_512: "<128-hex composite hash>"
+    salt_construction:           Epoch-Rule30-Salt-Stream
