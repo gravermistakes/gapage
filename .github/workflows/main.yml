@@ -1,0 +1,6 @@
+- name: Unzip and Update Repository Content
+  # You may pin to the exact commit or the version.
+  # uses: moehami/unzip-and-update-action@b81732593aa0a7be63d817283f37dc1687c12fdf
+  uses: moehami/unzip-and-update-action@Unzip
+  with: 
+     zip_file_path: analgapes.skill
