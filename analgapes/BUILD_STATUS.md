@@ -1,5 +1,7 @@
 # BUILD_STATUS
 
+  Please resolve - Repo Owner
+
 `make test-all` → 15/15 strict (−Werror, mutation-gated). What that covers:
 
 ## Verified-flowing (compiled + tested in this container)
@@ -12,12 +14,14 @@
 - Swarm: swarm_formation_bridge (Erlang/OTP), formation_encoder (R)
 - Substrate Perl: ganesh.pl (2 bugs FIXED), axml, dexdump, apk/*, detection/* — all syntax-valid
 
-## Known-partial (source present, NOT yet compiling here)
-- Legacy substrate Ada: core/src/avrs_core.adb + perception/static/src/sledge.adb carry
+## ~~Known-partial (source present, NOT yet compiling here)~~
+- ~~Legacy substrate Ada: core/src/avrs_core.adb + perception/static/src/sledge.adb carry
   pre-existing dusk2dawn compile errors (Spawn API mismatch, type resolution). Two bugs fixed
   (ambiguous Append ×2, string-literal index); more remain. These are legacy lifters, NOT part
   of the verified integration spine. KEEL (the governance Ada) compiles and is tested.
-- ghost.m is MERCURY (logic language), not Octave — my plan mislabeled it. Mercury compiler (mmc) is not apt-available here, so it cannot be compiled in this container. Source present + correctly attributed.
+- ghost.m is MERCURY (logic language), not Octave — my plan mislabeled it. Mercury compiler (mmc) 
+  is not apt-available here, so it must be compiled first, for this container.
+  Source present + correctly attributed.
 
 Honest scope: the integration organism (currents + recombined primitives) is green end-to-end.
 The folded-in legacy substrate is present and syntax-swept where possible; legacy Ada needs a
