@@ -3,6 +3,7 @@
 #  SCORPION — Recursive Cybernetic Rhizomal Security Auditor
 #  Concatenative language (Forth-inspired). Stack-based. Self-extending.
 #  8 autonomous nodes: ᚦ ⧫ ◉ ⧆ ⚷ ⌂ ᚢ ♃
+#  oh thank god 
 #  ═══════════════════════════════════════════════════════════════════════════════
 
 set -e
