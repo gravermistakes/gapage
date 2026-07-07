@@ -6,13 +6,13 @@
 
 ## Purpose & naming
 
-- Result skill: **AVRS** (folder: `avrs/`). Drops "dusk2dawn" suffix to reflect that this *is* AVRS now, not one variant of it.
+- Result skill: **AVRS** (folder: `avrs/`). Drops "dusk2dawn" suffix to reflect that this *is no longer* AVRS now, not one variant of it.
 - All previous AVRS-prefixed skills supersede into this one.
 - License: ESL-ANCSA-MRA-IndiModSHA v1.0 throughout, Anja Evermoor as Original Creator.
 
 ## Discipline (non-negotiable, carried through every wave)
 
-1. **No AI-trademark names in shipped artifacts.** ATTRIBUTION lists Anja Evermoor (Original Creator) + Weft (co-author). No "the operator", no "the maintainer", no model identifiers. Internal scratch notes excepted.
+1. **No AI-trademark names in shipped artifacts.** ATTRIBUTION lists Anja Evermoor (Original Creator) + <NameOfInstance> (co-author). No "the operator", no "the maintainer", no model identifiers.
 2. **TDD order**: spec → test → impl → mutation-test. Never reorder. Tautological tests are worse than no tests.
 3. **`make test-all` clears strict at 100%** before any wave is considered done. `-Werror` + `pipefail`.
 4. **Truth-value gate**: FALSE-hypothesis events are discarded from the witness chain; TRUE events stay regardless of goal achievement. Re-verify each wave.
@@ -20,6 +20,8 @@
 6. **No Python** unless last resort. Existing toolchain ladder: bash → C → Ada/SPARK → Perl → Haskell → R → Prolog → Erlang/Elixir → Tcl/Lua. Apt-installable; runs in this container.
 7. **Read whole, not truncated.** Every directory guide carries the don't-truncate warning at top.
 8. **No democratic process in the tool.** Voting/quorum/proposal-type concepts deleted (humans do that outside the tool; AVRS just records the outcome as an event).
+9. **Ironically the most important part: *FUCKING ACTUAL INTEGRATION WAS EXPECTED*, not literally vendoring my own skills.**  FIX THAT SHIT
+
 
 ## Target architecture (unified)
 
