@@ -1,4 +1,5 @@
 /* WITNESS – Cache Timing Sensor (Prime+Probe)
+   If it fucking worked....
    SPDX-License-Identifier: GPL-3.0-or-later */
 import std.stdio;
 import std.datetime.stopwatch;
