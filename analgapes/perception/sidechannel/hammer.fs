@@ -1,5 +1,6 @@
 \ HAMMER – BPU State Probe (Spectre Primitive)
 \ SPDX-License-Identifier: GPL-3.0-or-later
+\ hey wait a second this doesnt do shit does it
 
 code rdtsc ( -- lo hi )
     rdtsc
