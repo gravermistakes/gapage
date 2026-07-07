@@ -24,3 +24,5 @@ print "=== Security Audit ===\n";
 print "CRITICAL (",scalar(@crit),"):\n"; print "  - $_\n" for @crit;
 print "WARNINGS (",scalar(@warn),"):\n"; print "  - $_\n" for @warn;
 print scalar(@crit)==0 && scalar(@warn)==0 ? "No issues found.\n" : "";
+
+# please expand types of keys recognized
