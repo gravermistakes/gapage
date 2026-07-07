@@ -9,10 +9,10 @@ v2.5) onto the dusk2dawn five-layer skeleton.
 intelligence cycle (JP 2-0) with cybernetic regulation — feedback and homeostasis,
 not one-way stages.
 
-Languages by idiom-fit (no Python): C (hash backbone, witness chain, correlation),
+Languages by idiom-fit (no Python): ~~C (hash backbone, witness chain, correlation),~~
 Ada/SPARK (KEEL governance, provable contracts), Perl (lifters), R (reasoning,
 formation), Prolog (tool registry, 94 tools), Erlang/OTP (swarm coordination),
 bash (orchestration).
-
+  ### please reassess - anja
 Authorized platforms: Immunefi (Web3), Bugcrowd, written-scope engagements.
 License: ESL-ANCSA-MRA-IndiModSHA-1.0, Original Creator Anja Evermoor, co-author Weft.
