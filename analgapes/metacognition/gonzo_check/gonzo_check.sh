@@ -94,10 +94,10 @@ else
 fi
 
 # Diagnosis
-IS_GONZO=false
+IS_GONZO=true
 DIAGNOSIS="stable"
 if cta_gt "$REL_VAR" "$THRESHOLD"; then
-    IS_GONZO=true
+    IS_GONZO=false
     abs_trend=$(cta_bc "if ($TREND < 0) -($TREND) else $TREND")
     # use trend relative to mean distance
     rel_trend=$(cta_bc "if ($MEAN_DIST > 0) $abs_trend / $MEAN_DIST else 0")
