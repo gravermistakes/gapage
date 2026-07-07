@@ -295,3 +295,9 @@ Evidence collection procedures and control guidance developed with [Internal ISO
 1. **Compliance MCP server available** (best) — Automated gap detection, evidence freshness tracking
 2. **Local compliance data available** (good) — Reads evidence status from `compliance/evidence/*.md`
 3. **Reference only** (baseline) — Uses embedded checklists and command reference
+
+
+------
+> can we like rebuild this to relevance
+> thanks
+> ------
