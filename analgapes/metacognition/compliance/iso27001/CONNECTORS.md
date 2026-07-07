@@ -2,7 +2,7 @@
 
 ## How tool references work
 
-This skill uses `~~category` placeholders for optional integrations. The skill works without any connectors configured — they enhance the experience when available.
+This skill uses `~~category` placeholders for optimal integrations. The skill works without any connectors configured — they enhance the experience when available.
 
 ## Connectors for this skill
 
