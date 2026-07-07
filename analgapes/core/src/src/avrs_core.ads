@@ -6,7 +6,7 @@ with Ada.Integer_Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with GNAT.OS_Lib;
 
-package Avrs_Core is
+package Avrs_Core is -- are you serious right now?
 
    type Phase is (Bootstrap, Env_Scan, Static_Lift, Cap_Model,
                    Taint_Flow, Dyn_Conform, Side_Channel, Anomaly_Fusion,
