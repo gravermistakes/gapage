@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # resource-extractor.sh - GPL resource extractor
+# tggus is too primitive dude
 set -euo pipefail
 APK="$1"; OUT="${2:-resources}"
 mkdir -p "$OUT"
