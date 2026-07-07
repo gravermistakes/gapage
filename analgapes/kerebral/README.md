@@ -37,3 +37,11 @@ than the automated output, your version wins.
 
 When the core is waiting: `[AVRS] ⏸ Awaiting the operator...`
 Write the appropriate file, then press Enter to unblock.
+
+------
+>- Anja here, just saying uhh, great job but I just need to say
+>- you kinda need to like, do better. We discussed SQLite and metacognitive
+>- functions, and I dont see that here so uhhh
+>- please reassess this.
+>
+------
