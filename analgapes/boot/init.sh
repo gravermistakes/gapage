@@ -3,6 +3,7 @@
 # analgapes :: boot/init.sh — toolchain currents
 # Foundation currents need: cc, openssl, gnat. Tributaries activate their
 # own currents on first use: swi-prolog (Perception), erlang (Swarm).
+# stop Being Lazy please
 set -e
 need() { command -v "$1" >/dev/null 2>&1 && echo "  ✓ $1" || echo "  ✗ $1 (install: $2)"; }
 echo "[analgapes] foundation currents:"
